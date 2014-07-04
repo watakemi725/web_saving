@@ -33,15 +33,7 @@
     //Add the gesture to the webview
     [wv addGestureRecognizer:doubleTapGesture];
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
+   
 }
 
 -(void)doubleTapGesture:(UITapGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
