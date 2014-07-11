@@ -24,7 +24,11 @@
     NSURL *url = [NSURL URLWithString:@"http://www.dholic.co.jp/"];
     NSURLRequest *req = [NSURLRequest requestWithURL:url];
     [wv loadRequest:req];
+ 
     
+    
+    
+    /*
     UITapGestureRecognizer *doubleTapGesture = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(doubleTapGesture:)];
     //Set the no. of taps
     doubleTapGesture.numberOfTapsRequired = 2;
@@ -32,10 +36,47 @@
     //doubleTapGesture.delegate = self;
     //Add the gesture to the webview
     [wv addGestureRecognizer:doubleTapGesture];
+*/
     
-   
+    UITapGestureRecognizer *gs = [[UITapGestureRecognizer alloc] init];
+    gs.numberOfTapsRequired = 1;
+    gs.delegate = self;
+    [self.view addGestureRecognizer:gs];
+    
 }
 
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    // Return YES for supported orientations
+    return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
+}
+
+-(BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
+    NSLog(@"TAPPED");
+    //Touch gestures below top bar should not make the page turn.
+    //EDITED Check for only Tap here instead.
+    if ([gestureRecognizer isKindOfClass:[UITapGestureRecognizer class]]) {
+        CGPoint touchPoint = [touch locationInView:self.view];
+        
+        NSUserDefaults * userDefaults = [NSUserDefaults standardUserDefaults];
+        bool pageFlag = [userDefaults boolForKey:@"pageDirectionRTLFlag"];
+        NSLog(@"pageFlag tapbtnRight %d", pageFlag);
+        
+        if(self.interfaceOrientation==UIInterfaceOrientationPortrait||self.interfaceOrientation==UIInterfaceOrientationPortraitUpsideDown) {
+            NSString *imgURL = [NSString stringWithFormat:@"document.elementFromPoint(%f, %f).src", touchPoint.x, touchPoint.y];
+            NSString *urlToSave = [wv stringByEvaluatingJavaScriptFromString:imgURL];
+            NSLog(@"urlToSave :%@",urlToSave);
+            NSURL * imageURL = [NSURL URLWithString:urlToSave];
+            NSData * imageData = [NSData dataWithContentsOfURL:imageURL];
+            UIImage * image = [UIImage imageWithData:imageData];
+            imageview.image = image;
+        }
+    }
+    return YES;
+}
+
+/*
 -(void)doubleTapGesture:(UITapGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch {
     NSLog(@"TAPPED");
     //Touch gestures below top bar should not make the page turn.
@@ -61,7 +102,7 @@
 
     
 }
-
+*/
 
 
 //

@@ -21,9 +21,6 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <gestureRecognizers/>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="zsM-CO-h63" appends="YES" id="ewD-ho-2WP"/>
-                                </connections>
                             </webView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UjJ-ia-Nfm">
                                 <rect key="frame" x="0.0" y="524" width="320" height="44"/>
@@ -61,14 +58,12 @@
                     </view>
                     <connections>
                         <outlet property="imageview" destination="CHW-cB-9dg" id="j63-BC-sOV"/>
-                        <outlet property="pangesture" destination="zsM-CO-h63" id="XA7-Zd-lZ5"/>
                         <outlet property="titleLabel" destination="ZbY-uU-dPj" id="vjz-gu-xXh"/>
                         <outlet property="urlLabel" destination="pa8-UH-Vl4" id="K8R-LW-0P4"/>
                         <outlet property="wv" destination="PS2-hG-faI" id="2QS-t3-MZO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="zsM-CO-h63"/>
             </objects>
         </scene>
     </scenes>
